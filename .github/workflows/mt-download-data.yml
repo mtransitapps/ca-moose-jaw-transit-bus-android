@@ -65,17 +65,6 @@ jobs:
         with:
           code-sync: ${{ github.ref == format('refs/heads/{0}', env.MT_DEFAULT_BRANCH_NAME) }}
 
-      # - name: MT patch downloader user-agent for Moose Jaw GTFS
-      #   if: steps.check-input-url.outputs.has_input_url == 'true'
-      #   run: |
-      #     INPUT_URL_FILE="config/input_url"
-      #     if [[ ! -f "$INPUT_URL_FILE" ]]; then
-      #       INPUT_URL_FILE="app-android/config/input_url"
-      #     fi
-      #     if grep -q "moosejaw.ca/wp-content/uploads/2023/11/moosejaw-GTFS.zip" "$INPUT_URL_FILE"; then
-      #       sed -i 's/MonTransit/Mozilla\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/137.0.0.0 Safari\/537.36/g' commons/commons.sh
-      #     fi
-
       - name: MT commit code change
         if: steps.check-input-url.outputs.has_input_url == 'true'
         run: ./commit_code_change.sh
